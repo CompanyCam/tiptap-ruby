@@ -36,6 +36,7 @@ module TipTap
         value = content_tag(:strong, value) if bold?
         value = content_tag(:s, value) if strike?
         value = content_tag(:a, value, href: link_href, target: link_target) if link?
+        value = content_tag(:span, value, style: inline_style_content(text_styles)) if text_style?
         value
       end
 
@@ -67,6 +68,10 @@ module TipTap
         has_mark_with_type?("code")
       end
 
+      def text_style?
+        has_mark_with_type?("textStyle")
+      end
+
       def link_href
         marks.find { |mark| mark["type"] == "link" }&.dig("attrs", "href")
       end
@@ -75,10 +80,18 @@ module TipTap
         marks.find { |mark| mark["type"] == "link" }&.dig("attrs", "target")
       end
 
+      def text_styles
+        marks.find { |mark| mark["type"] == "textStyle" }&.dig("attrs")
+      end
+
       private
 
       def has_mark_with_type?(type)
         marks.any? { |mark| mark["type"] == type }
+      end
+
+      def inline_style_content(styles)
+        styles.reduce("") { |acc, val| acc + "#{val[0]}:#{val[1]};" }
       end
     end
   end

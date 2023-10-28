@@ -85,6 +85,15 @@ RSpec.describe TipTap::Nodes::Text do
           expect(html).to eq('<a href="https://example.com" target="_blank">Hello World!</a>')
         end
       end
+
+      context "text style" do
+        it "returns the text wrapped in a span tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "textStyle", attrs: {color: "#f0f0f0"}}]})
+          html = node.to_html
+
+          expect(html).to eq('<span style="color:#f0f0f0;">Hello World!</span>')
+        end
+      end
     end
   end
 
