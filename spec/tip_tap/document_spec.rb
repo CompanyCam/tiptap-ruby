@@ -195,4 +195,16 @@ RSpec.describe TipTap::Document do
       expect(document.content.first).to be_a(TipTap::Nodes::Blockquote)
     end
   end
+
+  describe "codeblock" do
+    it "adds a codeblock node" do
+      document = TipTap::Document.new do |document|
+        document.codeblock do |codeblock|
+          codeblock.code("Hello World!")
+        end
+      end
+
+      expect(document.content.first).to be_a(TipTap::Nodes::Codeblock)
+    end
+  end
 end

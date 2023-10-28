@@ -50,6 +50,15 @@ RSpec.describe TipTap::Nodes::Text do
         end
       end
 
+      context "code" do
+        it "returns the text wrapped in a code tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "code"}]})
+          html = node.to_html
+
+          expect(html).to eq("<code>Hello World!</code>")
+        end
+      end
+
       context "bold, italic, and underline" do
         it "returns the text wrapped in a strong, em, and u tags" do
           node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "italic"}, {type: "bold"}, {type: "underline"}]})

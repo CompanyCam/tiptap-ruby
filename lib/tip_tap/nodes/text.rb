@@ -30,6 +30,7 @@ module TipTap
 
       def to_html
         value = text
+        value = content_tag(:code, value) if code?
         value = content_tag(:u, value) if underline?
         value = content_tag(:em, value) if italic?
         value = content_tag(:strong, value) if bold?
@@ -55,6 +56,10 @@ module TipTap
 
       def link?
         has_mark_with_type?("link")
+      end
+
+      def code?
+        has_mark_with_type?("code")
       end
 
       def link_href

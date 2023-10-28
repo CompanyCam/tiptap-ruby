@@ -50,5 +50,10 @@ module TipTap
       add_content(Nodes::Blockquote.new(&block))
     end
 
+    def codeblock(&block)
+      raise ArgumentError, "Block required" if block.nil?
+
+      add_content(Nodes::Codeblock.new(&block))
+    end
   end
 end

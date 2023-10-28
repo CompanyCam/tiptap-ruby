@@ -15,6 +15,7 @@ require "tip_tap/nodes/task_list"
 require "tip_tap/nodes/text"
 require "tip_tap/nodes/image"
 require "tip_tap/nodes/blockquote"
+require "tip_tap/nodes/codeblock"
 
 module TipTap
   class Error < StandardError; end
