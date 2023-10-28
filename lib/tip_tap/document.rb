@@ -43,5 +43,12 @@ module TipTap
     def image(src:)
       add_content(Nodes::Image.new(src: src))
     end
+
+    def blockquote(&block)
+      raise ArgumentError, "Block required" if block.nil?
+
+      add_content(Nodes::Blockquote.new(&block))
+    end
+
   end
 end

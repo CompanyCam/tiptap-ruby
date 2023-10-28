@@ -181,4 +181,18 @@ RSpec.describe TipTap::Document do
       expect(document.content.first).to be_a(TipTap::Nodes::BulletList)
     end
   end
+
+  describe "blockquote" do
+    it "adds a blockquote node" do
+      document = TipTap::Document.new do |document|
+        document.blockquote do |quote|
+          quote.paragraph do |para|
+            para.text("Hello World!")
+          end
+        end
+      end
+
+      expect(document.content.first).to be_a(TipTap::Nodes::Blockquote)
+    end
+  end
 end
