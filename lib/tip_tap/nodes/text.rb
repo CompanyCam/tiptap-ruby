@@ -34,6 +34,7 @@ module TipTap
         value = content_tag(:u, value) if underline?
         value = content_tag(:em, value) if italic?
         value = content_tag(:strong, value) if bold?
+        value = content_tag(:s, value) if strike?
         value = content_tag(:a, value, href: link_href, target: link_target) if link?
         value
       end
@@ -56,6 +57,10 @@ module TipTap
 
       def link?
         has_mark_with_type?("link")
+      end
+
+      def strike?
+        has_mark_with_type?("strike")
       end
 
       def code?

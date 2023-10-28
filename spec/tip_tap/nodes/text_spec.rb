@@ -50,6 +50,15 @@ RSpec.describe TipTap::Nodes::Text do
         end
       end
 
+      context "strikethrough" do
+        it "returns the text wrapped in a s tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "strike"}]})
+          html = node.to_html
+
+          expect(html).to eq("<s>Hello World!</s>")
+        end
+      end
+
       context "code" do
         it "returns the text wrapped in a code tag" do
           node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "code"}]})
