@@ -50,6 +50,24 @@ RSpec.describe TipTap::Nodes::Text do
         end
       end
 
+      context "strikethrough" do
+        it "returns the text wrapped in a s tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "strike"}]})
+          html = node.to_html
+
+          expect(html).to eq("<s>Hello World!</s>")
+        end
+      end
+
+      context "code" do
+        it "returns the text wrapped in a code tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "code"}]})
+          html = node.to_html
+
+          expect(html).to eq("<code>Hello World!</code>")
+        end
+      end
+
       context "bold, italic, and underline" do
         it "returns the text wrapped in a strong, em, and u tags" do
           node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "italic"}, {type: "bold"}, {type: "underline"}]})
@@ -65,6 +83,15 @@ RSpec.describe TipTap::Nodes::Text do
           html = node.to_html
 
           expect(html).to eq('<a href="https://example.com" target="_blank">Hello World!</a>')
+        end
+      end
+
+      context "text style" do
+        it "returns the text wrapped in a span tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "textStyle", attrs: {color: "#f0f0f0"}}]})
+          html = node.to_html
+
+          expect(html).to eq('<span style="color:#f0f0f0;">Hello World!</span>')
         end
       end
     end
