@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.authors = ["Chad Wilken"]
   spec.email = ["chad.wilken@gmail.com"]
 
-  spec.summary = "Generate and parse TipTap documents in Ruby."
-  spec.description = "A library that allows you to generate, parse, and render TipTap documents in Ruby."
+  spec.summary = "Parse, generate and render TipTap documents in Ruby."
+  spec.description = "A gem for parsing, generating, and rendering TipTap Documents and Nodes using Ruby."
   spec.homepage = "https://github.com/chadwilken/tiptap-ruby"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
