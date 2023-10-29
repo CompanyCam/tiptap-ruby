@@ -72,6 +72,51 @@ Rendering to plain text is useful if you want to search the contents of your Tip
 document.to_plain_text # => My Important Document
 ```
 
+### Custom Nodes
+
+You can extend the library to add custom node types. First, define your `Node` subclass.
+
+```ruby
+# lib/tip_tap/nodes/gallery.rb
+
+module TipTap
+  module Nodes
+    class Gallery < Node
+      self.type_name = 'gallery'
+      self.html_tag = :div
+      self.html_class_name = 'gallery'
+    end
+  end
+end
+```
+
+Then create an initializer and define an extensions module and include it in the corresponding node. For example:
+
+```ruby
+# config/initializers/tiptap.rb
+
+require 'tip_tap'
+require 'tip_tap/nodes/gallery'
+
+module TipTap::DocumentAdditions
+  def gallery(&block)
+    raise ArgumentError, "Block required" if block.nil?
+    add_content(TipTap::Nodes::Gallery.new(&block))
+  end
+end
+
+TipTap::Document.include(TipTap::DocumentAdditions)
+```
+
+Now you can generate gallery nodes on a `Document` instance:
+
+```ruby
+document = TipTap::Document.new
+document.gallery do |gallery|
+  gallery.gallery_item(src: 'example.com')
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bundle exec rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
