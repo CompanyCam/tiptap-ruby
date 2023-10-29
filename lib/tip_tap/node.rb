@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "tip_tap/registerable"
 require "tip_tap/html_renderable"
 require "tip_tap/json_renderable"
 require "tip_tap/plain_text_renderable"
@@ -10,6 +11,7 @@ require "tip_tap/has_content"
 # converting to HTML, JSON, and plain text
 module TipTap
   class Node
+    include Registerable
     include HtmlRenderable
     include JsonRenderable
     include PlainTextRenderable
