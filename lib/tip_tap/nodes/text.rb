@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
+require "tip_tap/registerable"
 require "tip_tap/json_renderable"
 require "tip_tap/html_renderable"
 
 module TipTap
   module Nodes
     class Text
+      include Registerable
       include JsonRenderable
       include HtmlRenderable
 
