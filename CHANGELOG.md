@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.4.0] - 2023-10-29
+
+- Extract `Registerable` module from `JsonRenderable` so that Node registration is separated from being JSON renderable.
+- Make `Document` a subclass of `Node`.
+
 ## [0.3.0] - 2023-10-29
 
 - Tweak dependency version requirements to be greater than or equal to
