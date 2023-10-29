@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    tiptap-ruby (0.2.0)
-      actionview (~> 6.0)
-      activesupport (~> 6.0)
+    tiptap-ruby (0.3.0)
+      actionview (>= 6.0)
+      activesupport (>= 6.0)
 
 GEM
   remote: https://rubygems.org/
