@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "tip_tap/registerable"
 require "tip_tap/node"
 
 # This is the class that all child nodes will be added to.
