@@ -1,23 +1,18 @@
 # frozen_string_literal: true
 
-require "tip_tap/registerable"
-require "tip_tap/json_renderable"
-require "tip_tap/html_renderable"
+require "tip_tap/node"
 
 module TipTap
   module Nodes
-    class Text
-      include Registerable
-      include JsonRenderable
-      include HtmlRenderable
-
+    class Text < Node
       attr_reader :text, :marks
 
       self.type_name = "text"
 
-      def initialize(text, marks: [])
-        @text = text
-        @marks = marks.map(&:deep_stringify_keys)
+      def initialize(content, **attributes)
+        @text = content
+        @marks = Array(attributes[:marks]).map(&:deep_stringify_keys)
+        yield self if block_given?
       end
 
       def self.from_json(json)
