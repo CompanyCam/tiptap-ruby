@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.5.0] - 2023-10-30
+
+- Make `Text` a subclass of `Node`.
+- Try to unify the interface a bit more for the initialize method.
+
 ## [0.4.0] - 2023-10-29
 
 - Extract `Registerable` module from `JsonRenderable` so that Node registration is separated from being JSON renderable.
