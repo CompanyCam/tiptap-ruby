@@ -80,13 +80,50 @@ RSpec.describe TipTap::Document do
     end
   end
 
-  describe "find_node" do
-    it "returns a node" do
-      document = TipTap::Document.from_json(json_contents)
-      node = document.find_node(TipTap::Nodes::Paragraph)
+  describe "Enumerable" do
+    it "iterates over the content for #each" do
+      json = {
+        type: "doc",
+        content: [
+          {
+            type: "paragraph",
+            content: [
+              {
+                type: "text",
+                text: "Hello World!",
+                marks: [
+                  {type: "bold"},
+                  {type: "italic"}
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      document = TipTap::Document.from_json(json)
+      expect(document.map(&:class)).to eq([TipTap::Nodes::Paragraph])
+    end
+  end
 
-      expect(node).to be_a(TipTap::Nodes::Paragraph)
-      expect(node.to_plain_text).to eq("Hello World!")
+  describe "find_node" do
+    context "when passing a string" do
+      it "returns a node" do
+        document = TipTap::Document.from_json(json_contents)
+        node = document.find_node(TipTap::Nodes::Paragraph.type_name)
+
+        expect(node).to be_a(TipTap::Nodes::Paragraph)
+        expect(node.to_plain_text).to eq("Hello World!")
+      end
+    end
+
+    context "when passing a class" do
+      it "returns a node" do
+        document = TipTap::Document.from_json(json_contents)
+        node = document.find_node(TipTap::Nodes::Paragraph)
+
+        expect(node).to be_a(TipTap::Nodes::Paragraph)
+        expect(node.to_plain_text).to eq("Hello World!")
+      end
     end
   end
 
