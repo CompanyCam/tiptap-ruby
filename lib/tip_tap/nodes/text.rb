@@ -37,7 +37,7 @@ module TipTap
         value
       end
 
-      def to_plain_text
+      def to_plain_text(separator: " ")
         text
       end
 
