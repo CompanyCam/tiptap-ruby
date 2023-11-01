@@ -4,6 +4,8 @@ require "active_support/core_ext/hash"
 
 module TipTap
   module HasContent
+    include Enumerable
+
     attr_reader :attrs, :content
 
     def self.included(base)
@@ -20,12 +22,22 @@ module TipTap
       yield self if block_given?
     end
 
-    def find_node(node_type)
-      content.find { |child| child.is_a?(node_type) }
+    def each
+      content.each { |child| yield child }
+    end
+
+    def find_node(type_class_or_name)
+      node_type = type_class_or_name.is_a?(String) ? TipTap.node_for(type_class_or_name) : type_class_or_name
+      find { |child| child.is_a?(node_type) }
     end
 
     def add_content(node)
       @content << node
+    end
+    alias_method :<<, :add_content
+
+    def size
+      content.size
     end
 
     module ClassMethods
