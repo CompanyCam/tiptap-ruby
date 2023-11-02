@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.8.0] - 2023-11-02
+
+### Breaking
+
+- Renamed `as_json` to `to_h` details outlined in https://github.com/chadwilken/tiptap-ruby/issues/10.
+
 ## [0.7.0] - 2023-11-02
 
 ### Breaking
