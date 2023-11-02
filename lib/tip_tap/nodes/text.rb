@@ -21,7 +21,7 @@ module TipTap
         new(json["text"], marks: Array(json["marks"]))
       end
 
-      def as_json
+      def to_h
         {type: type_name, text: text, marks: marks.map(&:deep_symbolize_keys)}.compact_blank
       end
 

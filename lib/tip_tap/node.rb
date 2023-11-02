@@ -12,9 +12,9 @@ require "tip_tap/has_content"
 module TipTap
   class Node
     include Registerable
+    include HasContent
     include HtmlRenderable
     include JsonRenderable
     include PlainTextRenderable
-    include HasContent
   end
 end

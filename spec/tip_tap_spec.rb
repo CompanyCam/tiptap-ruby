@@ -25,8 +25,8 @@ RSpec.describe TipTap do
     end
 
     it "parses the json and serializes it back to json" do
-      document_2 = TipTap::Document.from_json(document.as_json)
-      expect(document.as_json).to eq(document_2.as_json)
+      document_2 = TipTap::Document.from_json(document.to_h)
+      expect(document.to_h).to eq(document_2.to_h)
     end
   end
 end

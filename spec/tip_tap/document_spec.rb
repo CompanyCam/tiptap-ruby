@@ -145,10 +145,10 @@ RSpec.describe TipTap::Document do
     end
   end
 
-  describe "as_json" do
-    it "returns a JSON string" do
+  describe "to_h" do
+    it "returns a Hash representation of the object" do
       document = TipTap::Document.from_json(json_contents)
-      json = document.as_json
+      json = document.to_h
 
       expect(json).to eq({
         type: "doc",

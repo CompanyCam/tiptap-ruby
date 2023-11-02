@@ -36,10 +36,10 @@ RSpec.describe TipTap::Nodes::BulletList do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::BulletList.from_json(json_contents)
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq(json_contents.merge(type: "bulletList").deep_symbolize_keys)
     end

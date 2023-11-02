@@ -13,10 +13,10 @@ RSpec.describe TipTap::Nodes::TaskList do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::TaskList.new
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq({type: "taskList", content: []})
     end
