@@ -12,10 +12,10 @@ RSpec.describe TipTap::Nodes::HardBreak do
     end
   end
 
-  describe "to_json" do
+  describe "as_json" do
     it "returns a JSON object" do
       node = TipTap::Nodes::HardBreak.new
-      expect(node.to_json).to eq({type: "hardBreak"})
+      expect(node.as_json).to eq({type: "hardBreak"})
     end
   end
 end

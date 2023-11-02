@@ -2,6 +2,10 @@
 
 A gem for parsing, generating, and rendering TipTap Documents and Nodes using Ruby.
 
+## Note
+
+This gem is under active development and is changing somewhat quickly. There is a chance that there may be breaking changes until a stable version is released.
+
 ## Installation
 
 Install the gem and add to the application's Gemfile by executing:
@@ -55,7 +59,7 @@ Once you have a Document with some content you can render it to HTML, JSON, and 
 #### JSON
 
 ```ruby
-document.to_json # => { type: 'doc', content: […nodes]}
+document.as_json # => { type: 'doc', content: […nodes]}
 ```
 
 ### HTML

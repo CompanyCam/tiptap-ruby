@@ -20,10 +20,10 @@ RSpec.describe TipTap::Nodes::Image do
     end
   end
 
-  describe "to_json" do
+  describe "as_json" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Image.new(src: "https://img.companycam.com/abcd1234.jpeg")
-      json = node.to_json
+      json = node.as_json
 
       expect(json).to eq({type: "image", attrs: {src: "https://img.companycam.com/abcd1234.jpeg"}})
     end
