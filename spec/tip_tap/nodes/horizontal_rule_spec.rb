@@ -12,10 +12,10 @@ RSpec.describe TipTap::Nodes::HorizontalRule do
     end
   end
 
-  describe "to_json" do
+  describe "as_json" do
     it "returns a JSON object" do
       node = TipTap::Nodes::HorizontalRule.new
-      expect(node.to_json).to eq({type: "horizontalRule"})
+      expect(node.as_json).to eq({type: "horizontalRule"})
     end
   end
 end

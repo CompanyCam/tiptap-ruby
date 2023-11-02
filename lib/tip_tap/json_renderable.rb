@@ -9,12 +9,13 @@ module TipTap
     end
 
     # Generate a JSON object that is useable by the editor
-    def to_json
+    def as_json
       json = {type: type_name}
-      json = json.merge(content: content.map(&:to_json)) if should_include_content?
+      json = json.merge(content: content.map(&:as_json)) if should_include_content?
       json = json.merge(attrs: attrs.deep_symbolize_keys) if attrs.present?
       json
     end
+    alias_method :to_h, :as_json
 
     private
 

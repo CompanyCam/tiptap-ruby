@@ -46,11 +46,11 @@ RSpec.describe TipTap::Node do
     end
   end
 
-  describe "to_json" do
+  describe "as_json" do
     context "when the node is a Node class" do
       it "returns an only the content" do
         node = TipTap::Node.new
-        expect(node.to_json).to eq({type: nil, content: []})
+        expect(node.as_json).to eq({type: nil, content: []})
       end
     end
 
@@ -59,7 +59,7 @@ RSpec.describe TipTap::Node do
         klass = Class.new(TipTap::Node)
         klass.type_name = "myTestNode"
         node = klass.new(test: "test")
-        expect(node.to_json).to eq({type: "myTestNode", content: [], attrs: {test: "test"}})
+        expect(node.as_json).to eq({type: "myTestNode", content: [], attrs: {test: "test"}})
       end
     end
   end
