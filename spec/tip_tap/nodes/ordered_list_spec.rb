@@ -39,10 +39,10 @@ RSpec.describe TipTap::Nodes::OrderedList do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::OrderedList.from_json(json_contents)
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq(json_contents.merge(type: "orderedList").deep_symbolize_keys)
     end

@@ -59,7 +59,7 @@ Once you have a Document with some content you can render it to HTML, JSON, and 
 #### JSON
 
 ```ruby
-document.as_json # => { type: 'doc', content: […nodes]}
+document.to_h # => { type: 'doc', content: […nodes]}
 ```
 
 ### HTML

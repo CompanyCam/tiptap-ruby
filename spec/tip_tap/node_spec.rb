@@ -46,20 +46,20 @@ RSpec.describe TipTap::Node do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     context "when the node is a Node class" do
       it "returns an only the content" do
         node = TipTap::Node.new
-        expect(node.as_json).to eq({type: nil, content: []})
+        expect(node.to_h).to eq({type: nil, content: []})
       end
     end
 
     context "when the node is a subclass of Node" do
-      it "returns a JSON representation of the object" do
+      it "returns a Hash representation of the object" do
         klass = Class.new(TipTap::Node)
         klass.type_name = "myTestNode"
         node = klass.new(test: "test")
-        expect(node.as_json).to eq({type: "myTestNode", content: [], attrs: {test: "test"}})
+        expect(node.to_h).to eq({type: "myTestNode", content: [], attrs: {test: "test"}})
       end
     end
   end

@@ -97,10 +97,10 @@ RSpec.describe TipTap::Nodes::Text do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Text.new("Hello World!", marks: [{type: "bold"}, {type: "italic"}])
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq({type: "text", text: "Hello World!", marks: [{type: "bold"}, {type: "italic"}]})
     end

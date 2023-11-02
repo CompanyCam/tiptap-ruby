@@ -25,10 +25,10 @@ RSpec.describe TipTap::Nodes::ListItem do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::ListItem.from_json(json_content)
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq(json_content.merge(type: "listItem").deep_symbolize_keys)
     end

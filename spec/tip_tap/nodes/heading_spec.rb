@@ -29,10 +29,10 @@ RSpec.describe TipTap::Nodes::Heading do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Heading.new(level: 1)
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq({type: "heading", attrs: {level: 1}, content: []})
     end

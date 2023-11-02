@@ -12,10 +12,10 @@ RSpec.describe TipTap::Nodes::Codeblock do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Codeblock.new
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq({type: "codeBlock", content: []})
     end

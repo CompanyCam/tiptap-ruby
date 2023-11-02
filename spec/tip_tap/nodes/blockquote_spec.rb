@@ -24,10 +24,10 @@ RSpec.describe TipTap::Nodes::Blockquote do
     end
   end
 
-  describe "as_json" do
+  describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Blockquote.from_json(json_content)
-      json = node.as_json
+      json = node.to_h
 
       expect(json).to eq(json_content.merge(type: "blockquote").deep_symbolize_keys)
     end
