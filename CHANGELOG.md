@@ -1,5 +1,19 @@
 ## [Unreleased]
 
+## [0.7.0] - 2023-11-02
+
+### Breaking
+
+- Renamed `to_json` to `as_json` to follow Ruby/Rails convention.
+
+## [0.6.1] - 2023-11-01
+
+- Allow customizing the `separator` when calling `to_plain_text`.
+
+## [0.6.0] - 2023-11-01
+
+- Implement `Enumerable` for the `HasContent` module.
+
 ## [0.5.0] - 2023-10-30
 
 - Make `Text` a subclass of `Node`.
