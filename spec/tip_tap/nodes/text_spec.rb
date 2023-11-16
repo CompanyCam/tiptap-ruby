@@ -94,6 +94,44 @@ RSpec.describe TipTap::Nodes::Text do
           expect(html).to eq('<span style="color:#f0f0f0;">Hello World!</span>')
         end
       end
+
+      context "superscript" do
+        it "returns the text wrapped in a sup tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "superscript"}]})
+          html = node.to_html
+
+          expect(html).to eq("<sup>Hello World!</sup>")
+        end
+      end
+
+      context "subscript" do
+        it "returns the text wrapped in a sup tag" do
+          node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "subscript"}]})
+          html = node.to_html
+
+          expect(html).to eq("<sub>Hello World!</sub>")
+        end
+      end
+
+      context "highlight" do
+        context "without color" do
+          it "returns the text wrapped in a mark tag" do
+            node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "highlight"}]})
+            html = node.to_html
+
+            expect(html).to eq("<mark>Hello World!</mark>")
+          end
+        end
+
+        context "with color" do
+          it "returns the text wrapped in a mark tag with proper attributes" do
+            node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "highlight", attrs: {color: "#0f0f0f"}}]})
+            html = node.to_html
+
+            expect(html).to eq('<mark data-color="#0f0f0f" style="background-color:#0f0f0f;color:inherit;">Hello World!</mark>')
+          end
+        end
+      end
     end
   end
 

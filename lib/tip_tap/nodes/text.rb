@@ -27,6 +27,9 @@ module TipTap
 
       def to_html
         value = text
+        value = content_tag(:sup, value) if superscript?
+        value = content_tag(:sub, value) if subscript?
+        value = highlight_tag(value) if highlight?
         value = content_tag(:code, value) if code?
         value = content_tag(:u, value) if underline?
         value = content_tag(:em, value) if italic?
@@ -65,8 +68,26 @@ module TipTap
         has_mark_with_type?("code")
       end
 
+      def superscript?
+        has_mark_with_type?("superscript")
+      end
+
+      def subscript?
+        has_mark_with_type?("subscript")
+      end
+
+      def highlight?
+        has_mark_with_type?("highlight")
+      end
+
       def text_style?
         has_mark_with_type?("textStyle")
+      end
+
+      private
+
+      def has_mark_with_type?(type)
+        marks.any? { |mark| mark["type"] == type }
       end
 
       def link_href
@@ -81,14 +102,24 @@ module TipTap
         marks.find { |mark| mark["type"] == "textStyle" }&.dig("attrs")
       end
 
-      private
-
-      def has_mark_with_type?(type)
-        marks.any? { |mark| mark["type"] == type }
+      def highlight_color
+        marks.find { |mark| mark["type"] == "highlight" }&.dig("attrs", "color")
       end
 
       def inline_style_content(styles)
+        return nil if styles.empty?
         styles.reduce("") { |acc, val| acc + "#{val[0]}:#{val[1]};" }
+      end
+
+      def highlight_tag(value)
+        data = {}
+        styles = {}
+        if highlight_color
+          data[:color] = highlight_color
+          styles["background-color"] = highlight_color
+          styles[:color] = "inherit"
+        end
+        content_tag(:mark, text, data: data, style: inline_style_content(styles))
       end
     end
   end
