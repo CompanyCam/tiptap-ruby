@@ -10,13 +10,13 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Parse, generate and render TipTap documents in Ruby."
   spec.description = "A gem for parsing, generating, and rendering TipTap Documents and Nodes using Ruby."
-  spec.homepage = "https://github.com/chadwilken/tiptap-ruby"
+  spec.homepage = "https://github.com/CompanyCam/tiptap-ruby"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 2.7.0"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/chadwilken/tiptap-ruby"
-  spec.metadata["changelog_uri"] = "https://github.com/chadwilken/tiptap-ruby/blob/master/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/CompanyCam/tiptap-ruby"
+  spec.metadata["changelog_uri"] = "https://github.com/CompanyCam/tiptap-ruby/blob/master/CHANGELOG.md"
 
   spec.files = Dir["*.{md,txt}", "{lib}/**/*"]
   spec.require_paths = ["lib"]

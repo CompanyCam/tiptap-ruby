@@ -131,7 +131,7 @@ To release a new version, update the version number in `version.rb`, and then ru
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/chadwilken/tiptap-ruby.
+Bug reports and pull requests are welcome on GitHub at https://github.com/CompanyCam/tiptap-ruby.
 
 ## License
 
