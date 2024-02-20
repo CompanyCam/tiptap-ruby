@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tiptap-ruby (0.8.2)
+    tiptap-ruby (0.9.0)
       actionview (>= 6.0)
       activesupport (>= 6.0)
 
@@ -36,15 +36,15 @@ GEM
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
     minitest (5.20.0)
-    nokogiri (1.15.4-arm64-darwin)
+    nokogiri (1.16.2-arm64-darwin)
       racc (~> 1.4)
-    nokogiri (1.15.4-x86_64-linux)
+    nokogiri (1.16.2-x86_64-linux)
       racc (~> 1.4)
     parallel (1.23.0)
     parser (3.2.2.4)
       ast (~> 2.4.1)
       racc
-    racc (1.7.1)
+    racc (1.7.3)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
