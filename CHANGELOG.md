@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.9.0] - 2024-02-20
+
+- Update Nokogiri for security vulnerability
+
 ## [0.8.2] - 2023-12-05
 
 - Update documentation and links to point to new GitHub repo at CompanyCam.
