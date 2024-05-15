@@ -244,4 +244,22 @@ RSpec.describe TipTap::Document do
       expect(document.content.first).to be_a(TipTap::Nodes::Codeblock)
     end
   end
+
+  describe "blank?" do
+    context "when the document is NOT blank" do
+      it "returns false" do
+        document = TipTap::Document.new do |document|
+          document.paragraph { |p| p.text("Hello World!") }
+        end
+        expect(document.blank?).to eq(false)
+      end
+    end
+
+    context "when the document is blank" do
+      it "returns true" do
+        document = TipTap::Document.new.tap(&:paragraph)
+        expect(document.blank?).to eq(true)
+      end
+    end
+  end
 end
