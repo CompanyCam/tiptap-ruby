@@ -40,6 +40,10 @@ module TipTap
       content.size
     end
 
+    def blank?
+      content&.all?(&:blank?)
+    end
+
     module ClassMethods
       # Create a new instance from a TipTap JSON object.
       # All nodes are recursively parsed and converted to Ruby objects
