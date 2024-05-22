@@ -20,7 +20,7 @@ RSpec.describe TipTap do
 
     it "parses the json and returns the plain text" do
       expect(document.to_plain_text).to eq(
-        "Site Summary Overview -  May 2nd 2023  This is a site visit summary that is being  synthesized  by  Chad Wilken.  Todo 1 Todo 2 Todo 3  This is a heading 2 This is a heading 3  This is a bullet item This is  another item Final paragraph."
+        "Site Summary Overview -  May 2nd 2023  This is a site visit summary that is being synthesized by Chad Wilken.  Todo 1 Todo 2 Todo 3  This is a heading 2 This is a heading 3  This is a bullet item This is another item Final paragraph."
       )
     end
 

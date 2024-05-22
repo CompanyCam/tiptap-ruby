@@ -89,5 +89,53 @@ RSpec.describe TipTap::Node do
       expect(text).to be_a(String)
       expect(text).to eq("Hello World!")
     end
+
+    context "when the node has children" do
+      it "breaks up paragraphs with separator" do
+        node = TipTap::Node.from_json({
+          content: [
+            {type: "paragraph", content: [type: "text", text: "Hello World!"]},
+            {type: "paragraph", content: [type: "text", text: "How are you?"]}
+          ]
+        })
+        text = node.to_plain_text(separator: "\n\n")
+        expect(text).to be_a(String)
+        expect(text).to eq("Hello World!\n\nHow are you?")
+      end
+
+      it "does not break up links with separator" do
+        node = TipTap::Node.from_json({
+          content: [
+            {
+              type: "paragraph", content: [
+                {type: "text", text: "Hello "},
+                {type: "text", text: "World!", marks: [{type: "link", attrs: {href: "https://example.com"}}]}
+              ]
+            },
+            {type: "paragraph", content: [type: "text", text: "How are you?"]}
+          ]
+        })
+        text = node.to_plain_text(separator: "\n\n")
+        expect(text).to be_a(String)
+        expect(text).to eq("Hello World!\n\nHow are you?")
+      end
+
+      it "does not break up bold marks with separator" do
+        node = TipTap::Node.from_json({
+          content: [
+            {
+              type: "paragraph", content: [
+                {type: "text", text: "Hello "},
+                {type: "text", text: "World!", marks: [{type: "bold"}]}
+              ]
+            },
+            {type: "paragraph", content: [type: "text", text: "How are you?"]}
+          ]
+        })
+        text = node.to_plain_text(separator: "\n\n")
+        expect(text).to be_a(String)
+        expect(text).to eq("Hello World!\n\nHow are you?")
+      end
+    end
   end
 end
