@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.9.4] - 2024-07-18
+
+- Ensure that text key is always present when converting document to a hash
+
 ## [0.9.0] - 2024-02-20
 
 - Update Nokogiri for security vulnerability
