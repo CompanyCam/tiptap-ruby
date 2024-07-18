@@ -22,7 +22,9 @@ module TipTap
       end
 
       def to_h
-        {type: type_name, text: text, marks: marks.map(&:deep_symbolize_keys)}.compact_blank
+        data = {type: type_name, text: text.presence || ""}
+        data[:marks] = marks.map(&:deep_symbolize_keys) unless marks.empty?
+        data
       end
 
       def to_html
