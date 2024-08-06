@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.9.6] - 2024-08-06
+
+- Bump rexml version to 3.3.4 for CVE
+
 ## [0.9.4] - 2024-07-18
 
 - Ensure that text key is always present when converting document to a hash
