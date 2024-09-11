@@ -262,4 +262,45 @@ RSpec.describe TipTap::Document do
       end
     end
   end
+
+  describe "#table" do
+    let(:doc) do
+      TipTap::Document.new do |d|
+        d.table do |t|
+          t.table_row do |r|
+            r.table_header { |h| h.paragraph { |p| p.text "Header" } }
+            r.table_cell { |c| c.paragraph { |p| p.text "Cell" } }
+          end
+        end
+      end
+    end
+
+    it "adds a Table to the document" do
+      expect(doc.content.first).to be_a(TipTap::Nodes::Table)
+    end
+
+    it "correctly structures table-related nodes" do
+      table = doc.content.first
+      expect(table).to be_a(TipTap::Nodes::Table)
+
+      row = table.content.first
+      expect(row).to be_a(TipTap::Nodes::TableRow)
+
+      header = row.content.first
+      expect(header).to be_a(TipTap::Nodes::TableHeader)
+      expect(header.to_plain_text).to eq("Header")
+
+      cell = row.content.last
+      expect(cell).to be_a(TipTap::Nodes::TableCell)
+      expect(cell.to_plain_text).to eq("Cell")
+    end
+
+    it "generates the correct hash structure for table nodes" do
+      table_hash = doc.to_h[:content].first
+
+      expect(table_hash[:type]).to eq("table")
+      expect(table_hash[:content].first[:type]).to eq("tableRow")
+      expect(table_hash[:content].first[:content].map { |node| node[:type] }).to eq(["tableHeader", "tableCell"])
+    end
+  end
 end

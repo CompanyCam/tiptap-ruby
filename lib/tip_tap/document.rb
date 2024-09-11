@@ -47,5 +47,11 @@ module TipTap
 
       add_content(Nodes::Codeblock.new(&block))
     end
+
+    def table(&block)
+      raise ArgumentError, "Block required" if block.nil?
+
+      add_content(Nodes::Table.new(&block))
+    end
   end
 end
