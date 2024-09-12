@@ -22,7 +22,7 @@ module TipTap
       end
 
       def to_h
-        data = {type: type_name, text: text}
+        data = {type: type_name, text: text || ""}
         data[:marks] = marks.map(&:deep_symbolize_keys) unless marks.empty?
         data
       end
