@@ -16,6 +16,10 @@ require "tip_tap/nodes/text"
 require "tip_tap/nodes/image"
 require "tip_tap/nodes/blockquote"
 require "tip_tap/nodes/codeblock"
+require "tip_tap/nodes/table"
+require "tip_tap/nodes/table_row"
+require "tip_tap/nodes/table_cell"
+require "tip_tap/nodes/table_header"
 
 module TipTap
   class Error < StandardError; end

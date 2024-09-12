@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.9.8] - 2024-09-10
+
+- Table support (Table, TableRow, TableCell, TableHeader)
+
 ## [0.9.6] - 2024-08-06
 
 - Bump rexml version to 3.3.4 for CVE

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tiptap-ruby (0.9.7)
+    tiptap-ruby (0.9.8)
       actionview (>= 6.0)
       activesupport (>= 6.0)
 
@@ -109,6 +109,7 @@ GEM
 PLATFORMS
   arm64-darwin-21
   arm64-darwin-22
+  arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
