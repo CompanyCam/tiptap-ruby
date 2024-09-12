@@ -136,7 +136,7 @@ RSpec.describe TipTap::Nodes::Text do
   end
 
   describe "to_h" do
-     context "with marks" do
+    context "with marks" do
       it "returns a JSON object with marks" do
         node = TipTap::Nodes::Text.new("Hello World!", marks: [{type: "bold"}, {type: "italic"}])
         json = node.to_h
