@@ -4,57 +4,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_and_publish:
-    name: Build, tag & publish
+  publish_and_release:
+    name: Publish gem to RubyGems.org and create a GitHub Release
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
-      id-token: write 
+      id-token: write
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
+      - uses: actions/checkout@v4
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: ruby
 
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.2.1
-        bundler-cache: true
+      - uses: rubygems/release-gem@v1
 
-    - name: Get version
-      id: version
-      run: |
-        VERSION=$(ruby -e "require './lib/tip_tap/version'; puts TipTap::VERSION")
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
+      - name: Get version
+        id: version
+        run: |
+          VERSION=$(ruby -e "require './lib/tip_tap/version'; puts TipTap::VERSION")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-    - name: Create tag
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git tag v${{ steps.version.outputs.version }}
-
-    - name: Push tag
-      run: git push origin v${{ steps.version.outputs.version }}
-
-    - name: Install dependencies
-      run: bundle install
-
-    - name: Run tests
-      run: bundle exec rspec
-
-    - name: Publish to RubyGems
-      uses: rubygems/release-gem@v1
-
-    - name: Create GitHub Release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: v${{ steps.version.outputs.version }}
-        release_name: Release ${{ steps.version.outputs.version }}
-        body: |
-          See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md) for details.
-        draft: false
-        prerelease: false
+      - name: Create GitHub Release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: v${{ steps.version.outputs.version }}
+          release_name: Release ${{ steps.version.outputs.version }}
+          body: |
+            See [CHANGELOG.md](https://github.com/${{ github.repository }}/blob/master/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false
