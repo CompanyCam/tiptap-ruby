@@ -5,13 +5,15 @@ on:
 
 permissions:
   contents: write
+  id-token: write 
 
 jobs:
   build_and_publish:
     name: Build, tag & publish
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v3
       with:
         fetch-depth: 0
 
@@ -19,35 +21,31 @@ jobs:
       uses: ruby/setup-ruby@v1
       with:
         ruby-version: 3.2.1
+        bundler-cache: true
 
     - name: Get version
       id: version
       run: |
         VERSION=$(ruby -e "require './lib/tip_tap/version'; puts TipTap::VERSION")
-        echo "::set-output name=version::$VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-    - name: Create and push tag
+    - name: Create tag
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git tag v${{ steps.version.outputs.version }}
-        git push origin v${{ steps.version.outputs.version }}
+
+    - name: Push tag
+      run: git push origin v${{ steps.version.outputs.version }}
+
+    - name: Install dependencies
+      run: bundle install
 
     - name: Run tests
-      run: |
-        bundle install
-        bundle exec rspec
+      run: bundle exec rspec
 
-    - name: Build and publish to RubyGems
-      run: |
-        mkdir -p $HOME/.gem
-        touch $HOME/.gem/credentials
-        chmod 0600 $HOME/.gem/credentials
-        printf -- "---\n:rubygems_api_key: ${GEM_HOST_API_KEY}\n" > $HOME/.gem/credentials
-        gem build *.gemspec
-        gem push *.gem
-      env:
-        GEM_HOST_API_KEY: "${{secrets.RUBYGEMS_API_KEY}}"
+    - name: Publish to RubyGems
+      uses: rubygems/release-gem@v1
 
     - name: Create GitHub Release
       uses: actions/create-release@v1
