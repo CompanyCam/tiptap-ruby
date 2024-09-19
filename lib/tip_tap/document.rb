@@ -32,6 +32,12 @@ module TipTap
       add_content(Nodes::BulletList.new(&block))
     end
 
+    def ordered_list(&block)
+      raise ArgumentError, "Block required" if block.nil?
+
+      add_content(Nodes::OrderedList.new(&block))
+    end
+
     def image(src:)
       add_content(Nodes::Image.new(src: src))
     end

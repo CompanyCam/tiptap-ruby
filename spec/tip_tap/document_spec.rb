@@ -219,6 +219,22 @@ RSpec.describe TipTap::Document do
     end
   end
 
+  describe "ordered_list" do
+    it "adds an ordered list node" do
+      document = TipTap::Document.new do |document|
+        document.ordered_list do |ol|
+          ol.list_item do |li|
+            li.paragraph do |para|
+              para.text("Hello World!")
+            end
+          end
+        end
+      end
+
+      expect(document.content.first).to be_a(TipTap::Nodes::OrderedList)
+    end
+  end
+
   describe "blockquote" do
     it "adds a blockquote node" do
       document = TipTap::Document.new do |document|
