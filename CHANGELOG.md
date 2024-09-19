@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.9.9] - 2024-09-19
+
+- Added ordered_list to Document
+- Preserve whitespace on Text nodes
+
 ## [0.9.8] - 2024-09-10
 
 - Table support (Table, TableRow, TableCell, TableHeader)
