@@ -136,11 +136,22 @@ RSpec.describe TipTap::Nodes::Text do
   end
 
   describe "to_h" do
-    it "returns a JSON object" do
-      node = TipTap::Nodes::Text.new("Hello World!", marks: [{type: "bold"}, {type: "italic"}])
-      json = node.to_h
+    context "with marks" do
+      it "returns a JSON object with marks" do
+        node = TipTap::Nodes::Text.new("Hello World!", marks: [{type: "bold"}, {type: "italic"}])
+        json = node.to_h
 
-      expect(json).to eq({type: "text", text: "Hello World!", marks: [{type: "bold"}, {type: "italic"}]})
+        expect(json).to eq({type: "text", text: "Hello World!", marks: [{type: "bold"}, {type: "italic"}]})
+      end
+    end
+
+    context "whitespace" do
+      it "returns a JSON object that preserves whitespace" do
+        node = TipTap::Nodes::Text.new(" ")
+        json = node.to_h
+
+        expect(json).to eq({type: "text", text: " "})
+      end
     end
   end
 end
