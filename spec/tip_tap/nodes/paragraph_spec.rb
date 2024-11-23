@@ -11,6 +11,16 @@ RSpec.describe TipTap::Nodes::Paragraph do
       expect(html).to be_a(String)
       expect(html).to eq("<p></p>")
     end
+
+    context "when the textAlign attribute is present" do
+      it "returns a p tag with the specified text alignment style" do
+        node = TipTap::Nodes::Paragraph.from_json({content: [], attrs: {'textAlign' => 'center'}})
+        html = node.to_html
+
+        expect(html).to be_a(String)
+        expect(html).to eq('<p style="text-align: center;"></p>')
+      end
+    end
   end
 
   describe "to_h" do

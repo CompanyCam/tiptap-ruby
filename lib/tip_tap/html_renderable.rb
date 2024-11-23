@@ -54,7 +54,17 @@ module TipTap
     end
 
     def to_html
-      content_tag(html_tag, safe_join(content.map(&:to_html)), class: html_class_name)
+      content_tag(html_tag, safe_join(content.map(&:to_html)), html_attributes)
+    end
+
+    def html_attributes
+      {style: inline_styles, class: html_class_name}.reject { |key, value| value.blank?}
+    end
+
+    def inline_styles
+      styles = []
+      styles << "text-align: #{attrs['textAlign']};" if attrs["textAlign"]
+      styles.join(" ")
     end
   end
 end
