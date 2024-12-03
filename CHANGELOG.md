@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.9.11] - 2024-09-19
+
+- Bump rails-html-sanitizer to 1.6.1 for CVE
+- Raise minimum version of ActionText to >= 7.0
+
 ## [0.9.9] - 2024-09-19
 
 - Added ordered_list to Document
