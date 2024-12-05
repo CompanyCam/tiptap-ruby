@@ -58,12 +58,12 @@ module TipTap
     end
 
     def html_attributes
-      {style: inline_styles, class: html_class_name}.reject { |key, value| value.blank?}
+      {style: inline_styles, class: html_class_name}.reject { |key, value| value.blank? }
     end
 
     def inline_styles
       styles = []
-      styles << "text-align: #{attrs['textAlign']};" if attrs["textAlign"]
+      styles << "text-align: #{attrs["textAlign"]};" if attrs["textAlign"]
       styles.join(" ")
     end
   end

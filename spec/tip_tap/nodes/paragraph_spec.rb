@@ -14,7 +14,7 @@ RSpec.describe TipTap::Nodes::Paragraph do
 
     context "when the textAlign attribute is present" do
       it "returns a p tag with the specified text alignment style" do
-        node = TipTap::Nodes::Paragraph.from_json({content: [], attrs: {'textAlign' => 'center'}})
+        node = TipTap::Nodes::Paragraph.from_json({content: [], attrs: {"textAlign" => "center"}})
         html = node.to_html
 
         expect(html).to be_a(String)
