@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tiptap-ruby (0.9.11)
+    tiptap-ruby (0.9.12)
       actionview (>= 7.0)
       activesupport (>= 6.0)
 

@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.9.12] - 2024-12-20
+
+- Add inline styles when converting headings and paragraphs to HTML
+
 ## [0.9.11] - 2024-09-19
 
 - Bump rails-html-sanitizer to 1.6.1 for CVE
