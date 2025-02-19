@@ -1,5 +1,11 @@
 ## [Unreleased]
 
+## [0.9.13] - 2025-02-19
+
+- Update Nokogiri for CVE
+- require URI explicity in HtmlRenderable
+- Force set platform to ruby for Gemfile.lock
+
 ## [0.9.12] - 2024-12-20
 
 - Add inline styles when converting headings and paragraphs to HTML
