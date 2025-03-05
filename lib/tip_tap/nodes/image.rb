@@ -12,7 +12,11 @@ module TipTap
       end
 
       def to_html
-        image_tag(src, attrs.except("src"))
+        image_tag(src, alt: alt)
+      end
+
+      def alt
+        attrs["alt"]
       end
 
       def src
