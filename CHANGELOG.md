@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.9.14] - 2025-03-05
+
+- Allow `alt` attribute for `Image` node.
+
 ## [0.9.13] - 2025-02-19
 
 - Update Nokogiri for CVE
