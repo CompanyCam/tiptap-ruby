@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.9.16] - 2025-04-22
+
+- Update Nokogiri for CVE
+
 ## [0.9.15] - 2025-03-05
 
 - Update Nokogiri for CVE
