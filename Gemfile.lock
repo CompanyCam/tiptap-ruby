@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    tiptap-ruby (0.9.16)
+    tiptap-ruby (0.9.17)
       actionview (>= 7.0)
       activesupport (>= 6.0)
 
@@ -50,7 +50,7 @@ GEM
     mini_portile2 (2.8.8)
     minitest (5.20.0)
     mutex_m (0.3.0)
-    nokogiri (1.18.8)
+    nokogiri (1.18.9)
       mini_portile2 (~> 2.8.2)
       racc (~> 1.4)
     parallel (1.23.0)
