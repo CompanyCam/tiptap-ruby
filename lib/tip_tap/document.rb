@@ -38,6 +38,14 @@ module TipTap
       add_content(Nodes::OrderedList.new(&block))
     end
 
+    def iframe(src:)
+      add_content(Nodes::Iframe.new(attrs))
+    end
+
+    def video(src:)
+      add_content(Nodes::Video.new(attrs))
+    end
+
     def image(src:)
       add_content(Nodes::Image.new(src: src))
     end
