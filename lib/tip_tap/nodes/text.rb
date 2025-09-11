@@ -5,7 +5,9 @@ require "tip_tap/node"
 module TipTap
   module Nodes
     class Text < Node
-      attr_reader :text, :marks
+      # Allow the text to be set and accessed directly
+      attr_accessor :text
+      attr_reader :marks
 
       self.type_name = "text"
 
