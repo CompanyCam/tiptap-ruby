@@ -39,6 +39,15 @@ RSpec.describe TipTap::Nodes::OrderedList do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown ordered list" do
+      node = TipTap::Nodes::OrderedList.from_json(json_contents)
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("1. **Hello World!**")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::OrderedList.from_json(json_contents)

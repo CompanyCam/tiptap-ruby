@@ -14,6 +14,10 @@ module TipTap
       def to_html
         tag.hr
       end
+
+      def to_markdown
+        "---"
+      end
     end
   end
 end

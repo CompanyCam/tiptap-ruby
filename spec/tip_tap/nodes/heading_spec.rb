@@ -39,6 +39,16 @@ RSpec.describe TipTap::Nodes::Heading do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown heading" do
+      node = TipTap::Nodes::Heading.from_json({content: [{type: "text", text: "Hello World!"}], attrs: {level: 2}})
+
+      expect(node.to_markdown).to eq("## Hello World!")
+      node = TipTap::Nodes::Heading.from_json({content: [{type: "text", text: "Hello World!"}], attrs: {level: 4}})
+      expect(node.to_markdown).to eq("#### Hello World!")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Heading.new(level: 1)

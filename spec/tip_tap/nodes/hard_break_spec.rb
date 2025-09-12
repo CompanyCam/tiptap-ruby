@@ -12,6 +12,15 @@ RSpec.describe TipTap::Nodes::HardBreak do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown hard break" do
+      node = TipTap::Nodes::HardBreak.new
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("\n")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::HardBreak.new

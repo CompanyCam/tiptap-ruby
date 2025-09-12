@@ -12,6 +12,15 @@ RSpec.describe TipTap::Nodes::HorizontalRule do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown horizontal rule" do
+      node = TipTap::Nodes::HorizontalRule.new
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("---")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::HorizontalRule.new

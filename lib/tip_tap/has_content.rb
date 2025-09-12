@@ -7,6 +7,7 @@ module TipTap
     include Enumerable
 
     attr_reader :attrs, :content
+    attr_accessor :parent
 
     def self.included(base)
       base.extend(ClassMethods)
@@ -53,12 +54,13 @@ module TipTap
         return new if json.nil?
 
         json.deep_stringify_keys!
-
         content = Array(json["content"]).map do |node|
           TipTap.node_for(node["type"]).from_json(node)
         end
 
-        new(content, **Hash(json["attrs"]))
+        instance = new(content, **Hash(json["attrs"]))
+        instance.content.each { |child| child.parent = instance }
+        instance
       end
     end
   end

@@ -8,6 +8,7 @@ module TipTap
       self.type_name = "blockquote"
       self.html_tag = :blockquote
       self.html_class_name = "blockquote"
+      self.markdown_tag = "> "
 
       def paragraph(&block)
         raise ArgumentError, "Block required" if block.nil?

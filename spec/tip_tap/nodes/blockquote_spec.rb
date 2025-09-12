@@ -24,6 +24,15 @@ RSpec.describe TipTap::Nodes::Blockquote do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown blockquote" do
+      node = TipTap::Nodes::Blockquote.from_json(json_content)
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("> Hello World!")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Blockquote.from_json(json_content)

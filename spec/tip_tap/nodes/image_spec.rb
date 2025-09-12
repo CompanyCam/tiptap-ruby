@@ -28,6 +28,15 @@ RSpec.describe TipTap::Nodes::Image do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown image" do
+      node = TipTap::Nodes::Image.new(src: "https://img.companycam.com/abcd1234.jpeg", alt: "Alt text example")
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("![Alt text example](https://img.companycam.com/abcd1234.jpeg)")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Image.new(src: "https://img.companycam.com/abcd1234.jpeg")

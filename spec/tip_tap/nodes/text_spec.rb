@@ -12,6 +12,33 @@ RSpec.describe TipTap::Nodes::Text do
     end
   end
 
+  describe "to_markdown" do
+    it "returns the text" do
+      node = TipTap::Nodes::Text.from_json({text: "Hello World!"})
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("Hello World!")
+    end
+
+    context "with marks" do
+      it "returns the text with marks" do
+        node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "bold"}]})
+        markdown = node.to_markdown
+
+        expect(markdown).to eq("**Hello World!**")
+      end
+    end
+
+    context "with multiple marks" do
+      it "returns the text with marks" do
+        node = TipTap::Nodes::Text.from_json({text: "Hello World!", marks: [{type: "bold"}, {type: "italic"}]})
+        markdown = node.to_markdown
+
+        expect(markdown).to eq("_**Hello World!**_")
+      end
+    end
+  end
+
   describe "to_html" do
     context "without marks" do
       it "returns the text" do

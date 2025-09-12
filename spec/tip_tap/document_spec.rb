@@ -135,6 +135,15 @@ RSpec.describe TipTap::Document do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown string" do
+      document = TipTap::Document.from_json(json_contents)
+      markdown = document.to_markdown
+
+      expect(markdown).to eq("_**Hello World!**_")
+    end
+  end
+
   describe "to_plain_text" do
     it "returns a plain text string" do
       document = TipTap::Document.from_json(json_contents)

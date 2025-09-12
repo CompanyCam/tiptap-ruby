@@ -12,6 +12,15 @@ RSpec.describe TipTap::Nodes::Codeblock do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown codeblock" do
+      node = TipTap::Nodes::Codeblock.from_json({content: [{type: "text", text: "Hello World!", marks: [{type: "code"}]}], attrs: {language: "ruby"}})
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("```ruby\nHello World!```")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Codeblock.new

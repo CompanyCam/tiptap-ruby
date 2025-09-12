@@ -5,32 +5,86 @@ require "tip_tap"
 RSpec.describe TipTap::Nodes::ListItem do
   let(:json_content) do
     {
+      type: "doc",
       content: [
         {
-          type: "paragraph",
+          type: "bulletList",
           content: [
-            {type: "text", text: "Hello World!"}
+            {
+              type: "listItem",
+              content: [
+                {
+                  type: "paragraph",
+                  content: [
+                    {type: "text", text: "Hello World!"}
+                  ]
+                }
+              ]
+            }
           ]
         }
       ]
     }
   end
+
+  let(:ordered_json_content) do
+    {
+      type: "doc",
+      content: [
+        {
+          type: "orderedList",
+          content: [
+            {
+              type: "listItem",
+              content: [
+                {
+                  type: "paragraph",
+                  content: [
+                    {type: "text", text: "Hello World!"}
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  end
+
   describe "to_html" do
     it "returns an li tag" do
-      node = TipTap::Nodes::ListItem.from_json(json_content)
+      node = TipTap::Document.from_json(json_content)
       html = node.to_html
 
       expect(html).to be_a(String)
-      expect(html).to eq('<li class="list-item"><p>Hello World!</p></li>')
+      expect(html).to include('<li class="list-item"><p>Hello World!</p></li>')
+    end
+  end
+
+  describe "to_markdown" do
+    it "returns a markdown list item" do
+      node = TipTap::Document.from_json(json_content)
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("- Hello World!")
+    end
+
+    context "when the list is ordered" do
+      it "returns a markdown numbered list item" do
+        node = TipTap::Document.from_json(ordered_json_content)
+        markdown = node.to_markdown
+
+        expect(markdown).to eq("1. Hello World!")
+      end
     end
   end
 
   describe "to_h" do
     it "returns a JSON object" do
-      node = TipTap::Nodes::ListItem.from_json(json_content)
+      node = TipTap::Document.from_json(json_content)
       json = node.to_h
 
-      expect(json).to eq(json_content.merge(type: "listItem").deep_symbolize_keys)
+      expect(json).to eq(json_content.deep_symbolize_keys)
     end
   end
 

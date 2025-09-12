@@ -44,6 +44,22 @@ module TipTap
         value
       end
 
+      def to_markdown
+        values = []
+        values << "_" if italic?
+        values << "**" if bold?
+        values << "~" if strike?
+        values << "^" if superscript?
+        values << "~" if subscript?
+        values << text
+        values << "~" if subscript?
+        values << "^" if superscript?
+        values << "~" if strike?
+        values << "**" if bold?
+        values << "_" if italic?
+        values.join("")
+      end
+
       def to_plain_text(separator: " ")
         text
       end

@@ -23,6 +23,15 @@ RSpec.describe TipTap::Nodes::Paragraph do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown paragraph" do
+      node = TipTap::Nodes::Paragraph.from_json({content: [{type: "text", text: "Hello World!"}]})
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("Hello World!")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::Paragraph.new

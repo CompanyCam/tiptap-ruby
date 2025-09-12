@@ -15,6 +15,10 @@ module TipTap
         image_tag(src, alt: alt)
       end
 
+      def to_markdown
+        "![#{alt}](#{src})"
+      end
+
       def alt
         attrs["alt"]
       end

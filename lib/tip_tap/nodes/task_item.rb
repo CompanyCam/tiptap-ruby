@@ -8,6 +8,7 @@ module TipTap
       self.type_name = "taskItem"
       self.html_tag = :li
       self.html_class_name = proc { class_names("task-item", {checked: checked?}) }
+      self.markdown_tag = proc { checked? ? "- [x] " : "- [ ] " }
 
       def paragraph(&block)
         raise ArgumentError, "Block required" if block.nil?

@@ -36,6 +36,15 @@ RSpec.describe TipTap::Nodes::BulletList do
     end
   end
 
+  describe "to_markdown" do
+    it "returns a markdown bullet list" do
+      node = TipTap::Nodes::BulletList.from_json(json_contents)
+      markdown = node.to_markdown
+
+      expect(markdown).to eq("- **Hello World!**")
+    end
+  end
+
   describe "to_h" do
     it "returns a JSON object" do
       node = TipTap::Nodes::BulletList.from_json(json_contents)
