@@ -11,6 +11,13 @@ RSpec.describe TipTap::Nodes::TableHeader do
     expect(described_class.html_tag).to eq(:th)
   end
 
+  describe "#to_markdown" do
+    it "returns a markdown representation of the header" do
+      header.paragraph { |p| p.text "Header" }
+      expect(header.to_markdown).to eq("| Header |")
+    end
+  end
+
   describe "#paragraph" do
     it "adds a Paragraph to the content" do
       header.paragraph { |p| p.text "Header" }

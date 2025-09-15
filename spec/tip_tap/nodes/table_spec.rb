@@ -11,6 +11,15 @@ RSpec.describe TipTap::Nodes::Table do
     expect(described_class.html_tag).to eq(:table)
   end
 
+  describe "#to_markdown" do
+    it "returns a markdown representation of the table" do
+      table.table_row do |row|
+        row.table_cell { |cell| cell.paragraph { |p| p.text "Test" } }
+      end
+      expect(table.to_markdown).to eq("| Test |\n\n")
+    end
+  end
+
   describe "#table_row" do
     it "adds a TableRow to the content" do
       table.table_row do |row|
