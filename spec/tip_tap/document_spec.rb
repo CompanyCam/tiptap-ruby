@@ -78,6 +78,23 @@ RSpec.describe TipTap::Document do
         }.to raise_error(TipTap::Registry::MissingNodeError)
       end
     end
+
+    it "sets the parent of the node" do
+      node = TipTap::Document.from_json({type: "doc", content: [{type: "paragraph", content: [{type: "text", text: "Hello World!"}]}]})
+      expect(node.parent).to be_nil
+      paragraph = node.find_node(TipTap::Nodes::Paragraph)
+      expect(paragraph.parent).to eq(node)
+      expect(paragraph.find_node(TipTap::Nodes::Text).parent).to eq(paragraph)
+    end
+  end
+
+  describe "#add_content" do
+    it "sets the parent of the node" do
+      node = TipTap::Document.new
+      paragraph = TipTap::Nodes::Paragraph.new
+      node.add_content(paragraph)
+      expect(paragraph.parent).to eq(node)
+    end
   end
 
   describe "Enumerable" do
