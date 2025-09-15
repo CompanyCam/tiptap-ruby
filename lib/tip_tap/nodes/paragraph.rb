@@ -7,6 +7,7 @@ module TipTap
     class Paragraph < Node
       self.type_name = "paragraph"
       self.html_tag = :p
+      self.markdown_include_newline_after = :parent_requires_newline?
 
       def text(text, marks: [])
         add_content(Text.new(text, marks: marks))
@@ -17,6 +18,10 @@ module TipTap
       # be a newline or some other character that we don't want to include in the plain text
       def to_plain_text(separator: " ")
         content.map { |node| node.to_plain_text(separator: separator) }.join("")
+      end
+
+      def parent_requires_newline?
+        [ListItem, TaskItem, Blockquote].exclude?(parent.class)
       end
     end
   end

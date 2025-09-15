@@ -33,7 +33,7 @@ RSpec.describe TipTap::Nodes::Image do
       node = TipTap::Nodes::Image.new(src: "https://img.companycam.com/abcd1234.jpeg", alt: "Alt text example")
       markdown = node.to_markdown
 
-      expect(markdown).to eq("![Alt text example](https://img.companycam.com/abcd1234.jpeg)")
+      expect(markdown).to eq("![Alt text example](https://img.companycam.com/abcd1234.jpeg)\n")
     end
   end
 

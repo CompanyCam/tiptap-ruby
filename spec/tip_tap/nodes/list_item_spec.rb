@@ -66,7 +66,7 @@ RSpec.describe TipTap::Nodes::ListItem do
       node = TipTap::Document.from_json(json_content)
       markdown = node.to_markdown
 
-      expect(markdown).to eq("- Hello World!")
+      expect(markdown).to eq("- Hello World!\n\n")
     end
 
     context "when the list is ordered" do
@@ -74,7 +74,7 @@ RSpec.describe TipTap::Nodes::ListItem do
         node = TipTap::Document.from_json(ordered_json_content)
         markdown = node.to_markdown
 
-        expect(markdown).to eq("1. Hello World!")
+        expect(markdown).to eq("1. Hello World!\n\n")
       end
     end
   end

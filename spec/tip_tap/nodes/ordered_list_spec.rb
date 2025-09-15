@@ -44,7 +44,7 @@ RSpec.describe TipTap::Nodes::OrderedList do
       node = TipTap::Nodes::OrderedList.from_json(json_contents)
       markdown = node.to_markdown
 
-      expect(markdown).to eq("1. **Hello World!**")
+      expect(markdown).to eq("1. **Hello World!**\n\n")
     end
   end
 

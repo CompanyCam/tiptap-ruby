@@ -29,7 +29,7 @@ RSpec.describe TipTap::Nodes::Blockquote do
       node = TipTap::Nodes::Blockquote.from_json(json_content)
       markdown = node.to_markdown
 
-      expect(markdown).to eq("> Hello World!")
+      expect(markdown).to eq("> Hello World!\n")
     end
   end
 

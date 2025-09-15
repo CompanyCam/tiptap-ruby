@@ -17,7 +17,7 @@ RSpec.describe TipTap::Nodes::HorizontalRule do
       node = TipTap::Nodes::HorizontalRule.new
       markdown = node.to_markdown
 
-      expect(markdown).to eq("---")
+      expect(markdown).to eq("---\n")
     end
   end
 

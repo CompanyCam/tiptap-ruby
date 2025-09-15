@@ -8,6 +8,7 @@ module TipTap
       self.type_name = "orderedList"
       self.html_tag = :ol
       self.html_class_name = "ordered-list"
+      self.markdown_include_newline_after = true
 
       def list_item(&block)
         raise ArgumentError, "Block required" if block.nil?
@@ -16,7 +17,7 @@ module TipTap
       end
 
       def start
-        attrs["start"]
+        attrs["start"] || 1
       end
     end
   end

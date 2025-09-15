@@ -8,6 +8,7 @@ module TipTap
       self.type_name = "bulletList"
       self.html_tag = :ul
       self.html_class_name = "bullet-list"
+      self.markdown_include_newline_after = true
 
       def list_item(&block)
         raise ArgumentError, "Block required" if block.nil?

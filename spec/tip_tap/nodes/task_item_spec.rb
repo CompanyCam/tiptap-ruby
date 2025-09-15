@@ -18,7 +18,7 @@ RSpec.describe TipTap::Nodes::TaskItem do
       node = TipTap::Nodes::TaskItem.from_json({content: [{type: "text", text: "Hello World!"}], attrs: {checked: true}})
       markdown = node.to_markdown
 
-      expect(markdown).to eq("- [x] Hello World!")
+      expect(markdown).to eq("- [x] Hello World!\n")
     end
 
     context "when the item is not checked" do
@@ -26,7 +26,7 @@ RSpec.describe TipTap::Nodes::TaskItem do
         node = TipTap::Nodes::TaskItem.from_json({content: [{type: "text", text: "Hello World!"}], attrs: {checked: false}})
         markdown = node.to_markdown
 
-        expect(markdown).to eq("- [ ] Hello World!")
+        expect(markdown).to eq("- [ ] Hello World!\n")
       end
     end
   end

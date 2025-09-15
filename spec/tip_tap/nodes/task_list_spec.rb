@@ -18,7 +18,7 @@ RSpec.describe TipTap::Nodes::TaskList do
       node = TipTap::Nodes::TaskList.from_json({content: [{type: "taskItem", content: [{type: "text", text: "Hello World!"}]}]})
       markdown = node.to_markdown
 
-      expect(markdown).to eq("- [ ] Hello World!")
+      expect(markdown).to eq("- [ ] Hello World!\n")
     end
   end
 

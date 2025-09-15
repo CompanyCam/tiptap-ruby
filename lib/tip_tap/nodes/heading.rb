@@ -8,6 +8,7 @@ module TipTap
       self.type_name = "heading"
       self.html_tag = proc { "h#{level}" }
       self.markdown_tag = proc { "#" * level + " " }
+      self.markdown_include_newline_after = true
 
       def text(text, marks: [])
         add_content(Text.new(text, marks: marks))

@@ -157,7 +157,7 @@ RSpec.describe TipTap::Document do
       document = TipTap::Document.from_json(json_contents)
       markdown = document.to_markdown
 
-      expect(markdown).to eq("_**Hello World!**_")
+      expect(markdown).to eq("_**Hello World!**_\n")
     end
   end
 

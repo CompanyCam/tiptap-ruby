@@ -41,7 +41,7 @@ RSpec.describe TipTap::Nodes::BulletList do
       node = TipTap::Nodes::BulletList.from_json(json_contents)
       markdown = node.to_markdown
 
-      expect(markdown).to eq("- **Hello World!**")
+      expect(markdown).to eq("- **Hello World!**\n\n")
     end
   end
 

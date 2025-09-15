@@ -6,6 +6,7 @@ module TipTap
   module Nodes
     class Image < Node
       self.type_name = "image"
+      self.markdown_include_newline_after = true
 
       def include_empty_content_in_json?
         false
@@ -16,7 +17,7 @@ module TipTap
       end
 
       def to_markdown
-        "![#{alt}](#{src})"
+        "![#{markdown_alt_text}](#{src})\n"
       end
 
       def alt
@@ -25,6 +26,10 @@ module TipTap
 
       def src
         attrs["src"]
+      end
+
+      def markdown_alt_text
+        alt || "Image"
       end
     end
   end
