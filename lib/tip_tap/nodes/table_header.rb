@@ -7,6 +7,9 @@ module TipTap
     class TableHeader < Node
       self.type_name = "tableHeader"
       self.html_tag = :th
+      self.markdown_tag = "| "
+      self.markdown_tag_end = " |"
+      self.markdown_include_newline_after = false
 
       def paragraph(&block)
         raise ArgumentError, "Block required" if block.nil?

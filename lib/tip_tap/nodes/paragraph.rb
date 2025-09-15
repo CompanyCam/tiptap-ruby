@@ -21,7 +21,7 @@ module TipTap
       end
 
       def parent_requires_newline?
-        [ListItem, TaskItem, Blockquote].exclude?(parent.class)
+        [ListItem, TaskItem, Blockquote, TableHeader, TableCell].exclude?(parent.class)
       end
     end
   end

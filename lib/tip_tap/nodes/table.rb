@@ -7,6 +7,7 @@ module TipTap
     class Table < Node
       self.type_name = "table"
       self.html_tag = :table
+      self.markdown_include_newline_after = true
 
       def table_row(&block)
         raise ArgumentError, "Block required" if block.nil?
