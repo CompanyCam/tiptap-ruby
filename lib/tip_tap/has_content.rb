@@ -33,6 +33,8 @@ module TipTap
     end
 
     def add_content(node)
+      node.parent = self
+
       @content << node
     end
     alias_method :<<, :add_content
