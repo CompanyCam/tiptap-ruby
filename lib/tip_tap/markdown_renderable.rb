@@ -45,7 +45,7 @@ module TipTap
     end
 
     def to_markdown
-      markdown_tag + content.map(&:to_markdown).join("") + markdown_tag_end
+      markdown_tag + content.map(&:to_markdown).join("\n") + markdown_tag_end
     end
   end
 end
