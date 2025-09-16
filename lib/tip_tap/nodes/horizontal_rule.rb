@@ -14,6 +14,10 @@ module TipTap
       def to_html
         tag.hr
       end
+
+      def to_markdown(context = Markdown::Context.root)
+        "---"
+      end
     end
   end
 end

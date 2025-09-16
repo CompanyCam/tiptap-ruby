@@ -13,6 +13,19 @@ module TipTap
 
         add_content(Paragraph.new(&block))
       end
+
+      def to_markdown(context = Markdown::Context.root)
+        render_cell_content(context)
+      end
+
+      private
+
+      def render_cell_content(context)
+        values = content.map { |node| node.to_markdown(context) }.reject(&:blank?)
+        joined = values.join("<br>")
+        sanitized = joined.gsub("\n\n", "<br><br>").gsub("\n", "<br>")
+        sanitized.gsub("|", "\\|")
+      end
     end
   end
 end

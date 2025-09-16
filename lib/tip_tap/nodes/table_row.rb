@@ -19,6 +19,18 @@ module TipTap
 
         add_content(TableHeader.new(&block))
       end
+
+      def to_markdown(context = Markdown::Context.root)
+        row_data = to_markdown_row(context)
+        "| #{row_data[:cells].join(' | ')} |"
+      end
+
+      def to_markdown_row(context = Markdown::Context.root)
+        {
+          cells: content.map { |node| node.to_markdown(context) },
+          header: content.all? { |node| node.is_a?(TableHeader) }
+        }
+      end
     end
   end
 end

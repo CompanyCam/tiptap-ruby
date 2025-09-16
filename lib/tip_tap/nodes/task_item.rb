@@ -1,22 +1,21 @@
 # frozen_string_literal: true
 
-require "tip_tap/node"
+require "tip_tap/nodes/list_item"
 
 module TipTap
   module Nodes
-    class TaskItem < Node
+    class TaskItem < ListItem
       self.type_name = "taskItem"
       self.html_tag = :li
       self.html_class_name = proc { class_names("task-item", {checked: checked?}) }
 
-      def paragraph(&block)
-        raise ArgumentError, "Block required" if block.nil?
-
-        add_content(Paragraph.new(&block))
-      end
-
       def checked?
         attrs["checked"]
+      end
+
+      def to_markdown(context = Markdown::Context.root)
+        marker = checked? ? "- [x] " : "- [ ] "
+        super(context, marker: marker)
       end
     end
   end

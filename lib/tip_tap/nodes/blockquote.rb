@@ -14,6 +14,15 @@ module TipTap
 
         add_content(Paragraph.new(&block))
       end
+
+      def to_markdown(context = Markdown::Context.root)
+        inner = content.map { |node| node.to_markdown(context) }.reject(&:blank?).join("\n\n")
+        lines = inner.split("\n", -1)
+        quoted = lines.map do |line|
+          line.strip.empty? ? ">" : "> #{line}"
+        end
+        quoted.join("\n")
+      end
     end
   end
 end

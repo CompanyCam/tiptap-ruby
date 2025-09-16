@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-require "tip_tap/node"
+require "tip_tap/nodes/table_cell"
 
 module TipTap
   module Nodes
-    class TableHeader < Node
+    class TableHeader < TableCell
       self.type_name = "tableHeader"
       self.html_tag = :th
 

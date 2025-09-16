@@ -10,6 +10,11 @@ module TipTap
     self.html_tag = :div
     self.html_class_name = "tiptap-document"
 
+    def to_markdown(context = Markdown::Context.root)
+      rendered_blocks = content.map { |node| node.to_markdown(context) }.reject(&:blank?)
+      rendered_blocks.join("\n\n").gsub(/\n{3,}/, "\n\n").rstrip
+    end
+
     def heading(level: 1, &block)
       raise ArgumentError, "Block required" if block.nil?
 

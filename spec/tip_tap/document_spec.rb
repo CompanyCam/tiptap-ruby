@@ -135,6 +135,119 @@ RSpec.describe TipTap::Document do
     end
   end
 
+  describe "to_markdown" do
+    let(:complex_document) do
+      TipTap::Document.new do |doc|
+        doc.heading(level: 2) { |heading| heading.text("Summary") }
+
+        doc.paragraph do |paragraph|
+          paragraph.text("Hello ")
+          paragraph.text("World", marks: [{type: "bold"}])
+          paragraph.add_content(TipTap::Nodes::HardBreak.new)
+          paragraph.text("Second line")
+        end
+
+        doc.bullet_list do |list|
+          list.list_item do |item|
+            item.paragraph { |para| para.text("First bullet") }
+            item.ordered_list do |nested|
+              nested.list_item { |li| li.paragraph { |para| para.text("Nested one") } }
+            end
+          end
+          list.list_item { |item| item.paragraph { |para| para.text("Second bullet") } }
+        end
+
+        doc.task_list do |list|
+          list.task_item(checked: true) { |item| item.paragraph { |para| para.text("Checked item") } }
+          list.task_item { |item| item.paragraph { |para| para.text("Todo item") } }
+        end
+
+        doc.blockquote { |blockquote| blockquote.paragraph { |para| para.text("Quote") } }
+
+        doc.codeblock { |block| block.code('puts "hi"') }
+
+        doc.table do |table|
+          table.table_row do |row|
+            row.table_header { |cell| cell.paragraph { |para| para.text("Header One") } }
+            row.table_header { |cell| cell.paragraph { |para| para.text("Header Two") } }
+          end
+
+          table.table_row do |row|
+            row.table_cell { |cell| cell.paragraph { |para| para.text("Cell A") } }
+            row.table_cell { |cell| cell.paragraph { |para| para.text("Cell B| with pipe") } }
+          end
+        end
+
+        doc.image(src: "https://example.com/image.png")
+        doc << TipTap::Nodes::HorizontalRule.new
+      end
+    end
+
+    it "renders inline marks as markdown" do
+      document = TipTap::Document.new do |doc|
+        doc.paragraph do |paragraph|
+          paragraph.text("Bold", marks: [{type: "bold"}])
+          paragraph.text(" ")
+          paragraph.text("Italic", marks: [{type: "italic"}])
+          paragraph.text(" ")
+          paragraph.text("Strike", marks: [{type: "strike"}])
+          paragraph.text(" ")
+          paragraph.text("Under", marks: [{type: "underline"}])
+          paragraph.text(" ")
+          paragraph.text("Highlight", marks: [{type: "highlight", attrs: {color: "#ffff00"}}])
+          paragraph.text(" ")
+          paragraph.text("Styled", marks: [{type: "textStyle", attrs: {color: "#ff0000"}}])
+          paragraph.text(" ")
+          paragraph.text("Super", marks: [{type: "superscript"}])
+          paragraph.text(" ")
+          paragraph.text("Sub", marks: [{type: "subscript"}])
+          paragraph.text(" ")
+          paragraph.text("Link", marks: [{type: "link", attrs: {href: "https://example.com", title: "Example"}}])
+          paragraph.text(" ")
+          paragraph.text("Inline code", marks: [{type: "code"}])
+        end
+      end
+
+      markdown = document.to_markdown
+
+      expect(markdown).to eq('**Bold** _Italic_ ~~Strike~~ <u>Under</u> <mark data-color="#ffff00" style="background-color:#ffff00;color:inherit;">Highlight</mark> <span style="color:#ff0000;">Styled</span> <sup>Super</sup> <sub>Sub</sub> [Link](https://example.com "Example") `Inline code`')
+    end
+
+    it "renders block level nodes and nested lists" do
+      markdown = complex_document.to_markdown
+
+      expected = <<~MARKDOWN.strip
+        ## Summary
+
+        Hello **World**  
+        Second line
+
+        - First bullet
+          1. Nested one
+        - Second bullet
+
+        - [x] Checked item
+        - [ ] Todo item
+
+        > Quote
+
+        ```
+        puts "hi"
+        ```
+
+        | Header One | Header Two |
+        | --- | --- |
+        | Cell A | Cell B\| with pipe |
+
+        ![](https://example.com/image.png)
+
+        ---
+      MARKDOWN
+
+      expect(markdown).to eq(expected)
+    end
+  end
+
   describe "to_plain_text" do
     it "returns a plain text string" do
       document = TipTap::Document.from_json(json_contents)
