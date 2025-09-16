@@ -37,12 +37,6 @@ module TipTap
 
   module MarkdownRenderable
     def to_markdown(context = Markdown::Context.root)
-      markdown_content(context)
-    end
-
-    private
-
-    def markdown_content(context)
       content.map { |child| child.to_markdown(context) }.join
     end
   end
