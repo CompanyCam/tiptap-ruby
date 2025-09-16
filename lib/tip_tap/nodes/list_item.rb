@@ -33,7 +33,7 @@ module TipTap
         add_content(TaskList.new(&block))
       end
 
-      def to_markdown(context = Markdown::Context.root, marker: "- ", tight: nil)
+      def to_markdown(context = Markdown::Context.root, marker: "- ")
         marker_length = marker.length
         first_prefix = context.indentation + marker
         rest_prefix = " " * (context.indent + marker_length)
