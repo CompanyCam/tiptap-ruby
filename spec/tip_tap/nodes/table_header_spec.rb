@@ -12,9 +12,51 @@ RSpec.describe TipTap::Nodes::TableHeader do
   end
 
   describe "#to_markdown" do
+    let(:json_content) do
+      {
+        content: [
+          {
+            type: "doc", content: [
+              {
+                type: "tableRow",
+                content: [
+                  {
+                    type: "tableHeader",
+                    content: [
+                      {
+                        type: "paragraph",
+                        content: [
+                          {
+                            type: "text", text: "Header 1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    type: "tableHeader",
+                    content: [
+                      {
+                        type: "paragraph",
+                        content: [
+                          {
+                            type: "text", text: "Header 2"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    end
+
     it "returns a markdown representation of the header" do
-      header.paragraph { |p| p.text "Header" }
-      expect(header.to_markdown).to eq("| Header |")
+      doc = TipTap::Document.from_json(json_content)
+      expect(doc.to_markdown).to eq("| Header 1 | Header 2 |\n| --- | --- |")
     end
   end
 

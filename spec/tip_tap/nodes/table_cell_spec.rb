@@ -12,9 +12,51 @@ RSpec.describe TipTap::Nodes::TableCell do
   end
 
   describe "#to_markdown" do
+    let(:json_content) do
+      {
+        content: [
+          {
+            type: "doc", content: [
+              {
+                type: "tableRow",
+                content: [
+                  {
+                    type: "tableCell",
+                    content: [
+                      {
+                        type: "paragraph",
+                        content: [
+                          {
+                            type: "text", text: "Cell 1"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    type: "tableCell",
+                    content: [
+                      {
+                        type: "paragraph",
+                        content: [
+                          {
+                            type: "text", text: "Cell 2"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    end
+
     it "returns a markdown representation of the cell" do
-      cell.paragraph { |p| p.text "Test" }
-      expect(cell.to_markdown).to eq("| Test |")
+      doc = TipTap::Document.from_json(json_content)
+      expect(doc.to_markdown).to eq("| Cell 1 | Cell 2 |\n")
     end
   end
 

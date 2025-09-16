@@ -12,6 +12,14 @@ RSpec.describe TipTap::Nodes::TableRow do
   end
 
   describe "#to_markdown" do
+    context "when the row is all headers" do
+      it "returns a markdown representation of the row with headers" do
+        row.table_header { |header| header.paragraph { |p| p.text "Header 1" } }
+        row.table_header { |header| header.paragraph { |p| p.text "Header 2" } }
+        expect(row.to_markdown).to eq("| Header 1 | Header 2 |\n| --- | --- |")
+      end
+    end
+
     it "returns a markdown representation of the row" do
       row.table_cell { |cell| cell.paragraph { |p| p.text "Test" } }
       expect(row.to_markdown).to eq("| Test |\n")
