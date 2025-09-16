@@ -23,8 +23,7 @@ module TipTap
       def render_cell_content(context)
         values = content.map { |node| node.to_markdown(context) }.reject(&:blank?)
         joined = values.join("<br>")
-        sanitized = joined.gsub("\n\n", "<br><br>").gsub("\n", "<br>")
-        sanitized.gsub("|", "\\|")
+        joined.gsub("\n\n", "<br><br>").gsub("\n", "<br>")
       end
     end
   end

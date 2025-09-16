@@ -205,14 +205,14 @@ module TipTap
         end
         style_segment = inline_style_content(styles)
         attr_segments << "style=\"#{escape_double_quotes(style_segment)}\"" if style_segment.present?
-        attributes_string = attr_segments.empty? ? "" : " #{attr_segments.join(' ')}"
+        attributes_string = attr_segments.empty? ? "" : " #{attr_segments.join(" ")}"
         "<#{tag}#{attributes_string}>#{value}</#{tag}>"
       end
 
       def escape_link_destination(href)
         escaped = href.gsub("(", "\\(").gsub(")", "\\)")
         escaped.gsub(/[\s]/) do |char|
-          char == " " ? "%20" : char
+          (char == " ") ? "%20" : char
         end
       end
 

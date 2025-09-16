@@ -46,7 +46,7 @@ module TipTap
       end
 
       def format_row(cells)
-        "| #{cells.join(' | ')} |"
+        "| #{cells.join(" | ")} |"
       end
     end
   end

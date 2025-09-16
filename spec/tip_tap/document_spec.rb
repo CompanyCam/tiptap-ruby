@@ -237,7 +237,7 @@ RSpec.describe TipTap::Document do
 
         | Header One | Header Two |
         | --- | --- |
-        | Cell A | Cell B\| with pipe |
+        | Cell A | Cell B| with pipe |
 
         ![](https://example.com/image.png)
 

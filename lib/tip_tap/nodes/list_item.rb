@@ -15,6 +15,24 @@ module TipTap
         add_content(Paragraph.new(&block))
       end
 
+      def bullet_list(&block)
+        raise ArgumentError, "Block required" if block.nil?
+
+        add_content(BulletList.new(&block))
+      end
+
+      def ordered_list(&block)
+        raise ArgumentError, "Block required" if block.nil?
+
+        add_content(OrderedList.new(&block))
+      end
+
+      def task_list(&block)
+        raise ArgumentError, "Block required" if block.nil?
+
+        add_content(TaskList.new(&block))
+      end
+
       def to_markdown(context = Markdown::Context.root, marker: "- ", tight: nil)
         marker_length = marker.length
         first_prefix = context.indentation + marker
@@ -32,7 +50,7 @@ module TipTap
         end
 
         first_segment = segments.shift || {type: :inline, text: ""}
-        first_text = first_segment[:type] == :list ? "" : first_segment[:text]
+        first_text = (first_segment[:type] == :list) ? "" : first_segment[:text]
         result = format_block(first_text, first_prefix, rest_prefix)
 
         segments.each do |segment|
