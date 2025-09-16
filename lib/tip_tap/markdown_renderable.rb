@@ -37,7 +37,8 @@ module TipTap
 
   module MarkdownRenderable
     def to_markdown(context = Markdown::Context.root)
-      content.map { |child| child.to_markdown(context) }.join
+      rendered_blocks = content.map { |node| node.to_markdown(context) }.reject(&:blank?)
+      rendered_blocks.join("\n\n").gsub(/\n{3,}/, "\n\n").rstrip
     end
   end
 end

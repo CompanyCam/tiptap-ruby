@@ -21,7 +21,7 @@ module TipTap
         column_count = rows_data.map { |row| row[:cells].size }.max || 0
         return "" if column_count.zero?
 
-        header_index = rows_data.index { |row| row[:header] }
+        header_index = rows_data.index { |row| row[:is_header] }
         header_cells = if header_index
           rows_data.delete_at(header_index)[:cells]
         else

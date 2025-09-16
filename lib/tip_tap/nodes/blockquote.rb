@@ -16,7 +16,7 @@ module TipTap
       end
 
       def to_markdown(context = Markdown::Context.root)
-        inner = content.map { |node| node.to_markdown(context) }.reject(&:blank?).join("\n\n")
+        inner = super(context)
         lines = inner.split("\n", -1)
         quoted = lines.map do |line|
           line.strip.empty? ? ">" : "> #{line}"

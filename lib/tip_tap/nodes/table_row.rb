@@ -25,10 +25,10 @@ module TipTap
         "| #{row_data[:cells].join(" | ")} |"
       end
 
-      def to_markdown_row(context = Markdown::Context.root)
+      def to_markdown_row(context)
         {
           cells: content.map { |node| node.to_markdown(context) },
-          header: content.all? { |node| node.is_a?(TableHeader) }
+          is_header: content.all? { |node| node.is_a?(TableHeader) }
         }
       end
     end

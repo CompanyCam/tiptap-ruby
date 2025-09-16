@@ -15,12 +15,6 @@ module TipTap
       end
 
       def to_markdown(context = Markdown::Context.root)
-        render_cell_content(context)
-      end
-
-      private
-
-      def render_cell_content(context)
         values = content.map { |node| node.to_markdown(context) }.reject(&:blank?)
         joined = values.join("<br>")
         joined.gsub("\n\n", "<br><br>").gsub("\n", "<br>")
