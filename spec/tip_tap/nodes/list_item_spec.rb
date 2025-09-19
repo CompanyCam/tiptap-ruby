@@ -44,4 +44,33 @@ RSpec.describe TipTap::Nodes::ListItem do
       expect(node.content.first).to be_a(TipTap::Nodes::Paragraph)
     end
   end
+
+  describe "nested lists" do
+    it "adds a bullet list" do
+      node = TipTap::Nodes::ListItem.new
+      node.bullet_list do |list|
+        list.list_item { |item| item.paragraph { |p| p.text("Child") } }
+      end
+
+      expect(node.content.last).to be_a(TipTap::Nodes::BulletList)
+    end
+
+    it "adds an ordered list" do
+      node = TipTap::Nodes::ListItem.new
+      node.ordered_list do |list|
+        list.list_item { |item| item.paragraph { |p| p.text("Child") } }
+      end
+
+      expect(node.content.last).to be_a(TipTap::Nodes::OrderedList)
+    end
+
+    it "adds a task list" do
+      node = TipTap::Nodes::ListItem.new
+      node.task_list do |list|
+        list.task_item { |item| item.paragraph { |p| p.text("Child") } }
+      end
+
+      expect(node.content.last).to be_a(TipTap::Nodes::TaskList)
+    end
+  end
 end

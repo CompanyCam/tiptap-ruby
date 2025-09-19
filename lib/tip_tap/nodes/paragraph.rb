@@ -12,6 +12,10 @@ module TipTap
         add_content(Text.new(text, marks: marks))
       end
 
+      def to_markdown(context = Markdown::Context.root)
+        content.map { |node| node.to_markdown(context) }.join
+      end
+
       # Override the default to_plain_text method to account for the nested Text nodes
       # we don't want to use the separator when joining the text nodes since it could
       # be a newline or some other character that we don't want to include in the plain text

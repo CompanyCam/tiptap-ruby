@@ -4,6 +4,7 @@ require "tip_tap/registerable"
 require "tip_tap/html_renderable"
 require "tip_tap/json_renderable"
 require "tip_tap/plain_text_renderable"
+require "tip_tap/markdown_renderable"
 require "tip_tap/has_content"
 
 # This is the base class for all TipTap nodes.
@@ -16,5 +17,6 @@ module TipTap
     include HtmlRenderable
     include JsonRenderable
     include PlainTextRenderable
+    include MarkdownRenderable
   end
 end

@@ -48,6 +48,27 @@ module TipTap
         text
       end
 
+      def to_markdown(context = Markdown::Context.root)
+        value = text.to_s
+        return "" if value.empty?
+
+        return value if context.within_code_block?
+
+        return wrap_with_backticks(value) if code?
+
+        value = escape_markdown(value)
+        value = apply_bold(value) if bold?
+        value = apply_italic(value) if italic?
+        value = apply_strike(value) if strike?
+        value = wrap_with_html_tag("u", value) if underline?
+        value = apply_highlight(value) if highlight?
+        value = apply_text_style(value) if text_style?
+        value = wrap_with_html_tag("sup", value) if superscript?
+        value = wrap_with_html_tag("sub", value) if subscript?
+        value = wrap_with_link(value) if link?
+        value
+      end
+
       def italic?
         has_mark_with_type?("italic")
       end
@@ -124,6 +145,83 @@ module TipTap
           styles[:color] = "inherit"
         end
         content_tag(:mark, text, data: data, style: inline_style_content(styles))
+      end
+
+      def escape_markdown(value)
+        value.gsub(/([\\`*_{}\[\]()#+!><~-])/) { |char| "\\#{char}" }
+      end
+
+      def wrap_with_backticks(value)
+        max_tick_sequence = value.scan(/`+/).map(&:length).max || 0
+        wrapper = "`" * (max_tick_sequence + 1)
+        "#{wrapper}#{value}#{wrapper}"
+      end
+
+      def apply_bold(value)
+        "**#{value}**"
+      end
+
+      def apply_italic(value)
+        "_#{value}_"
+      end
+
+      def apply_strike(value)
+        "~~#{value}~~"
+      end
+
+      def apply_highlight(value)
+        attributes = {}
+        styles = {}
+        if highlight_color
+          attributes["data-color"] = highlight_color
+          styles["background-color"] = highlight_color
+          styles["color"] = "inherit"
+        end
+        wrap_with_html_tag("mark", value, attributes, styles)
+      end
+
+      def apply_text_style(value)
+        styles = text_styles || {}
+        return value if styles.empty?
+
+        wrap_with_html_tag("span", value, {}, styles)
+      end
+
+      def wrap_with_link(value)
+        href = link_href.to_s
+        return value if href.blank?
+
+        destination = escape_link_destination(href)
+        title = link_title
+        title_part = title.present? ? " \"#{escape_double_quotes(title)}\"" : ""
+        "[#{value}](#{destination}#{title_part})"
+      end
+
+      def wrap_with_html_tag(tag, value, attributes = {}, styles = {})
+        attr_segments = []
+        attributes.each do |key, attr_value|
+          next if attr_value.blank?
+          attr_segments << "#{key}=\"#{escape_double_quotes(attr_value)}\""
+        end
+        style_segment = inline_style_content(styles)
+        attr_segments << "style=\"#{escape_double_quotes(style_segment)}\"" if style_segment.present?
+        attributes_string = attr_segments.empty? ? "" : " #{attr_segments.join(" ")}"
+        "<#{tag}#{attributes_string}>#{value}</#{tag}>"
+      end
+
+      def escape_link_destination(href)
+        escaped = href.gsub("(", "\\(").gsub(")", "\\)")
+        escaped.gsub(/[\s]/) do |char|
+          (char == " ") ? "%20" : char
+        end
+      end
+
+      def escape_double_quotes(value)
+        value.to_s.gsub('"', "&quot;")
+      end
+
+      def link_title
+        marks.find { |mark| mark["type"] == "link" }&.dig("attrs", "title")
       end
     end
   end

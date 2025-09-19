@@ -68,6 +68,14 @@ document.to_h # => { type: 'doc', content: […nodes]}
 document.to_html # => <div class="tiptap-document"><h1><em>My Important Document</em></h1></div>
 ```
 
+### Markdown
+
+Generate GitHub-flavored Markdown that preserves nested lists, code blocks, tables, and inline marks.
+
+```ruby
+document.to_markdown # => "# My Important Document\n\n- Item one\n- Item two"
+```
+
 ### Plain Text
 
 Rendering to plain text is useful if you want to search the contents of your TipTap content.
