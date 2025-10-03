@@ -93,6 +93,14 @@ RSpec.describe TipTap::Nodes::Text do
 
           expect(html).to eq('<span style="color:#f0f0f0;">Hello World!</span>')
         end
+
+        it 'returns the text wrapped in a span tag with valid CSS' do
+          node = TipTap::Nodes::Text.from_json({ text: 'Hello World!',
+                                                 marks: [{ type: 'textStyle', attrs: { fontSize: '14px' } }] })
+          html = node.to_html
+
+          expect(html).to eq('<span style="font-size:14px;">Hello World!</span>')
+        end
       end
 
       context "superscript" do
