@@ -8,6 +8,13 @@ module TipTap
       self.type_name = "heading"
       self.html_tag = proc { "h#{level}" }
 
+      def initialize(content = [], **attributes)
+        super(content, **attributes)
+        uuid = SecureRandom.uuid
+        @attrs["id"] = uuid
+        @attrs["data-toc-id"] = uuid
+      end
+
       def text(text, marks: [])
         add_content(Text.new(text, marks: marks))
       end
