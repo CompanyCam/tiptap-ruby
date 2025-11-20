@@ -22,6 +22,17 @@ module TipTap
       def level
         attrs["level"]
       end
+
+      def html_attributes
+        # doc-toc-id comes from TipTap and Ruby symbols do not support -
+        # so we use string keys here instead.
+        {
+          "style" => inline_styles,
+          "class" => html_class_name,
+          "id" => attrs["id"],
+          "data-toc-id" => attrs["data-toc-id"]
+        }.reject { |key, value| value.blank? }
+      end
     end
   end
 end

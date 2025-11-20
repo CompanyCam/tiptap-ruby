@@ -59,9 +59,7 @@ module TipTap
     end
 
     def html_attributes
-      attributes = {style: inline_styles, class: html_class_name}.reject { |key, value| value.blank? }
-      attributes.merge!({"id" => attrs["id"], "data-toc-id" => attrs["data-toc-id"]}) if self.is_a?(TipTap::Nodes::Heading)
-      attributes
+      {style: inline_styles, class: html_class_name}.reject { |key, value| value.blank? }
     end
 
     def inline_styles
