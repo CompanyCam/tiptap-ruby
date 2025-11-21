@@ -12,9 +12,13 @@ RSpec.describe TipTap do
     let(:json) { JSON.parse(File.read("spec/support/files/tiptap-state.json")) }
     let(:document) { TipTap::Document.from_json(json) }
 
+    before do
+      allow(SecureRandom).to receive(:uuid).and_return("auto-uuid-999")
+    end
+
     it "parses the json and returns the html" do
       expect(document.to_html).to eq(
-        '<div class="tiptap-document"><h1>Site Summary Overview - <em>May 2nd 2023</em></h1><img src="https://img.companycam.com/5zVdNKWQ1hqPOD-IspzX3kMsodTPlv6n39kgerOGjc4/rs:fit:4032:4032/q:100/aHR0cHM6Ly9jb21w/YW55Y2FtLXBlbmRp/bmcuczMuYW1hem9u/YXdzLmNvbS82OTc5/YmFlZS03MzU5LTQy/OWYtYmFhYS0yMmVl/NDY1NWZhODUuanBn.jpg" /><p>This is a site visit summary that is being <strong>synthesized</strong> by <strong><em>Chad Wilken.</em></strong></p><p></p><ul class="task-list"><li class="task-item checked"><p>Todo 1</p></li><li class="task-item"><p><strong>Todo 2</strong></p></li><li class="task-item"><p><strong><em>Todo 3</em></strong></p></li></ul><p></p><h2>This is a heading 2</h2><h3>This is a heading 3</h3><p></p><ul class="bullet-list"><li class="list-item"><p>This is a bullet item</p></li><li class="list-item"><p><strong>This is </strong><em>another item</em></p></li></ul><p>Final paragraph.</p></div>'
+        "<div class=\"tiptap-document\"><h1 id=\"auto-uuid-999\" data-toc-id=\"auto-uuid-999\">Site Summary Overview - <em>May 2nd 2023</em></h1><img src=\"https://img.companycam.com/5zVdNKWQ1hqPOD-IspzX3kMsodTPlv6n39kgerOGjc4/rs:fit:4032:4032/q:100/aHR0cHM6Ly9jb21w/YW55Y2FtLXBlbmRp/bmcuczMuYW1hem9u/YXdzLmNvbS82OTc5/YmFlZS03MzU5LTQy/OWYtYmFhYS0yMmVl/NDY1NWZhODUuanBn.jpg\" /><p>This is a site visit summary that is being <strong>synthesized</strong> by <strong><em>Chad Wilken.</em></strong></p><p></p><ul class=\"task-list\"><li class=\"task-item checked\"><p>Todo 1</p></li><li class=\"task-item\"><p><strong>Todo 2</strong></p></li><li class=\"task-item\"><p><strong><em>Todo 3</em></strong></p></li></ul><p></p><h2 id=\"auto-uuid-999\" data-toc-id=\"auto-uuid-999\">This is a heading 2</h2><h3 id=\"auto-uuid-999\" data-toc-id=\"auto-uuid-999\">This is a heading 3</h3><p></p><ul class=\"bullet-list\"><li class=\"list-item\"><p>This is a bullet item</p></li><li class=\"list-item\"><p><strong>This is </strong><em>another item</em></p></li></ul><p>Final paragraph.</p></div>"
       )
     end
 
