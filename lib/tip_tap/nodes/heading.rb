@@ -33,6 +33,13 @@ module TipTap
           "data-toc-id" => attrs["data-toc-id"]
         }.reject { |key, value| value.blank? }
       end
+
+      def to_markdown(context = Markdown::Context.root)
+        heading_level = [level.to_i, 1].max
+        prefix = "#" * heading_level
+        body = content.map { |node| node.to_markdown(context) }.join.strip
+        body.empty? ? prefix : "#{prefix} #{body}"
+      end
     end
   end
 end

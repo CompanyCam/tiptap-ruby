@@ -14,6 +14,10 @@ module TipTap
 
         add_content(ListItem.new(&block))
       end
+
+      def to_markdown(context = Markdown::Context.root)
+        content.map { |node| node.to_markdown(context, marker: "- ") }.join("\n")
+      end
     end
   end
 end

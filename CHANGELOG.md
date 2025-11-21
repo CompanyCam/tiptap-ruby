@@ -1,5 +1,10 @@
 ## [Unreleased]
 
+## [0.10.0] - 2025-09-19
+
+- Add support for rendering documents to markdown
+- Update rexml for CVE
+
 ## [0.9.16] - 2025-04-22
 
 - Update Nokogiri for CVE
