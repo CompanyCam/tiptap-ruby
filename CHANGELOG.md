@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.10.1] - 2025-11-21
+
+- Add support for Table of Contents
+
 ## [0.10.0] - 2025-09-19
 
 - Add support for rendering documents to markdown
