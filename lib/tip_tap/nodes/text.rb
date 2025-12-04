@@ -133,7 +133,8 @@ module TipTap
 
       def inline_style_content(styles)
         return nil if styles.empty?
-        styles.reduce("") { |acc, val| acc + "#{val[0]}:#{val[1]};" }
+
+        styles.reduce('') { |acc, val| acc + "#{val[0].underscore.dasherize}:#{val[1]};" }
       end
 
       def highlight_tag(value)
