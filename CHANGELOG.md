@@ -1,5 +1,9 @@
 ## [Unreleased]
 
+## [0.11.0] - 2026-10-14
+
+- Update various gems for CVE vulnerabilities
+
 ## [0.10.1] - 2025-11-21
 
 - Add support for Table of Contents
