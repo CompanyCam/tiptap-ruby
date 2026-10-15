@@ -20,6 +20,10 @@
 - Built-in child builders (Document, ListItem, lists, tables, …) come from `parent_builder` declarations on child classes.
 - `HardBreak` / `HorizontalRule` expose `hard_break` (Paragraph, Heading) and `horizontal_rule` (Document) builders.
 
+## [0.11.0] - 2026-10-14
+
+- Update various gems for CVE vulnerabilities
+
 ## [0.10.1] - 2025-11-21
 
 - Add support for Table of Contents
