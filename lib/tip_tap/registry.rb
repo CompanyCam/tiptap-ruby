@@ -1,27 +1,37 @@
 # frozen_string_literal: true
 
-# This is the registry for all the nodes that TipTap knows about.
-# It's a simple hash that maps TipTap JS node names to Ruby classes.
-# Registering a new node is as simple as:
-# TipTap::Registry.register('myNode', MyNode)
+require "tip_tap/schema"
+
+# Compatibility façade over TipTap.default_schema.
+# Prefer TipTap::Schema (and TipTap.default_schema) for new code.
+# TipTap::Registry.register / node_for / clear / registry still work.
 module TipTap
   class Registry
-    MissingNodeError = Class.new(StandardError)
+    MissingNodeError = Schema::MissingNodeError
+    MissingMarkError = Schema::MissingMarkError
 
     def self.register(name, klass)
-      registry[name.to_s] = klass
+      TipTap.default_schema.register(name, klass)
     end
 
     def self.node_for(name)
-      registry.fetch(name.to_s) { raise MissingNodeError.new("Unknown node type: #{name}") }
+      TipTap.default_schema.node_for(name)
+    end
+
+    def self.register_mark(name, klass)
+      TipTap.default_schema.register_mark(name, klass)
+    end
+
+    def self.mark_for(name)
+      TipTap.default_schema.mark_for(name)
     end
 
     def self.clear
-      @registry = {}
+      TipTap.default_schema.clear
     end
 
     def self.registry
-      @registry ||= {}
+      TipTap.default_schema.nodes
     end
   end
 end
